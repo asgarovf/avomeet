@@ -57,7 +57,7 @@ export function MeetingDetailsScreen({
             className="px-4 py-3 bg-gray-650 rounded-xl text-white w-full text-center"
           />
           {meetingIdError && (
-            <p className="text-xs text-red-600">{`Please enter valid meetingId`}</p>
+            <p className="text-xs text-red-600">{`Please enter valid Meeting ID`}</p>
           )}
         </>
       ) : null}
