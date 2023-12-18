@@ -297,7 +297,7 @@ export function JoiningScreen({
     <div className="overflow-y-auto flex flex-col flex-1 min-h-screen bg-gray-800">
       <Navbar />
       <div className="flex flex-col justify-center w-full">
-        <div className="flex w-[90%] md:w-[50%] flex-col items-center justify-center mx-auto my-20">
+        <div className="flex w-[90%] md:w-[45%] flex-col items-center justify-center mx-auto my-4">
           <div className="flex w-full h-full justify-center relative">
             <video
               autoPlay
@@ -306,7 +306,7 @@ export function JoiningScreen({
               ref={videoPlayerRef}
               controls={false}
               className={
-                "rounded-[32px] h-[520px] bg-gray-150 w-full object-cover flex items-center justify-center"
+                "rounded-[32px] h-[420px] bg-gray-150 w-full object-cover flex items-center justify-center"
               }
             />
 

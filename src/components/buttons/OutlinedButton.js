@@ -1,15 +1,11 @@
-import Lottie from "lottie-react";
 import { useEffect, useRef, useState } from "react";
-import { createPopper } from "@popperjs/core";
 
 export const OutlinedButton = ({
   bgColor,
   onClick,
   Icon,
   isFocused,
-  tooltip,
   badge,
-  lottieOption,
   disabledOpacity,
   renderRightComponent,
   disabled,
@@ -18,34 +14,11 @@ export const OutlinedButton = ({
   color,
   focusIconColor,
   isRequestProcessing,
-  borderColor,
   buttonText,
 }) => {
-  const [mouseOver, setMouseOver] = useState(false);
-  const [mouseDown, setMouseDown] = useState(false);
   const [blinkingState, setBlinkingState] = useState(1);
 
-  const [tooltipShow, setTooltipShow] = useState(false);
   const btnRef = useRef();
-  const tooltipRef = useRef();
-
-  const openTooltip = () => {
-    createPopper(btnRef.current, tooltipRef.current, {
-      placement: "top",
-      modifiers: [
-        {
-          name: "offset",
-          options: {
-            offset: [-50, 0],
-          },
-        },
-      ],
-    });
-    setTooltipShow(true);
-  };
-  const closeTooltip = () => {
-    setTooltipShow(false);
-  };
 
   const intervalRef = useRef();
 
@@ -79,34 +52,14 @@ export const OutlinedButton = ({
 
   return (
     <>
-      <div
-        ref={btnRef}
-        onMouseEnter={() => {
-          setMouseOver(true);
-          openTooltip();
-        }}
-        onMouseLeave={() => {
-          setMouseOver(false);
-          closeTooltip();
-        }}
-        onMouseDown={() => {
-          setMouseDown(true);
-        }}
-        onMouseUp={() => {
-          setMouseDown(false);
-        }}
-      >
+      <div ref={btnRef}>
         <div
-          className={`flex items-center justify-center  rounded-lg ${
-            bgColor ? `${bgColor}` : isFocused ? "bg-white" : "bg-gray-750"
-          } ${
-            mouseOver
-              ? "border-2 border-transparent border-solid"
-              : borderColor
-              ? `border-2 border-[${borderColor}] border-solid`
-              : bgColor
-              ? "border-2 border-transparent border-solid"
-              : "border-2 border-solid border-[#ffffff33]"
+          className={`flex items-center justify-center rounded-full ${
+            bgColor
+              ? `${bgColor}`
+              : isFocused
+              ? "bg-white hover:bg-gray-100"
+              : "bg-gray-750 hover:bg-gray-800"
           } md:m-2 m-1`}
           style={{
             transition: "all 200ms",
@@ -119,18 +72,6 @@ export const OutlinedButton = ({
               disabled ? "cursor-default" : "cursor-pointer"
             } flex items-center justify-center`}
             id={btnID}
-            onMouseEnter={() => {
-              setMouseOver(true);
-            }}
-            onMouseLeave={() => {
-              setMouseOver(false);
-            }}
-            onMouseDown={() => {
-              setMouseDown(true);
-            }}
-            onMouseUp={() => {
-              setMouseDown(false);
-            }}
             disabled={disabled}
             onClick={onClick}
           >
@@ -138,65 +79,41 @@ export const OutlinedButton = ({
               className="flex items-center justify-center p-1 m-1 rounded-lg"
               style={{
                 opacity: disabled ? disabledOpacity || 0.7 : 1,
-                transform: `scale(${mouseOver ? (mouseDown ? 0.95 : 1.1) : 1})`,
                 transition: `all ${200 * 1}ms`,
                 transitionTimingFunction: "linear",
               }}
             >
-              {Icon &&
-                (lottieOption ? (
-                  <div className={`flex items-center justify-center`}>
-                    <div
-                      style={{
-                        height: iconSize,
-                        width:
-                          (iconSize * lottieOption?.width) /
-                          lottieOption?.height,
-                      }}
+              {Icon && (
+                <>
+                  <Icon
+                    style={{
+                      color: isFocused
+                        ? focusIconColor || "#1C1F2E"
+                        : color
+                        ? color
+                        : "#fff",
+                      height: iconSize,
+                      width: iconSize,
+                    }}
+                    fillcolor={
+                      isFocused
+                        ? focusIconColor || "#1C1F2E"
+                        : color
+                        ? color
+                        : "#fff"
+                    }
+                  />
+                  {badge && (
+                    <p
+                      className={`${
+                        isFocused ? "text-black" : "text-white"
+                      } text-base ml-2`}
                     >
-                      <Lottie
-                        loop={lottieOption.loop}
-                        autoPlay={lottieOption.autoPlay}
-                        animationData={lottieOption.animationData}
-                        rendererSettings={{
-                          preserveAspectRatio:
-                            lottieOption.rendererSettings.preserveAspectRatio,
-                        }}
-                        isClickToPauseDisabled
-                      />
-                    </div>
-                  </div>
-                ) : (
-                  <>
-                    <Icon
-                      style={{
-                        color: isFocused
-                          ? focusIconColor || "#1C1F2E"
-                          : color
-                          ? color
-                          : "#fff",
-                        height: iconSize,
-                        width: iconSize,
-                      }}
-                      fillcolor={
-                        isFocused
-                          ? focusIconColor || "#1C1F2E"
-                          : color
-                          ? color
-                          : "#fff"
-                      }
-                    />
-                    {badge && (
-                      <p
-                        className={`${
-                          isFocused ? "text-black" : "text-white"
-                        } text-base ml-2`}
-                      >
-                        {badge}
-                      </p>
-                    )}
-                  </>
-                ))}
+                      {badge}
+                    </p>
+                  )}
+                </>
+              )}
             </div>
             {buttonText ? (
               <p className="text-sm text-white font-semibold mr-2 text-center">
@@ -205,17 +122,6 @@ export const OutlinedButton = ({
             ) : null}
           </button>
           {typeof renderRightComponent === "function" && renderRightComponent()}
-        </div>
-      </div>
-      <div
-        style={{ zIndex: 999 }}
-        className={`${
-          tooltipShow && (mouseOver || mouseDown) ? "" : "hidden"
-        } overflow-hidden flex flex-col items-center justify-center whitespace-pre-line`}
-        ref={tooltipRef}
-      >
-        <div className={"rounded-md p-1.5 bg-black "}>
-          <p className="text-base text-white ">{tooltip || ""}</p>
         </div>
       </div>
     </>

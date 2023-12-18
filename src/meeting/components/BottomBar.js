@@ -278,7 +278,6 @@ export function BottomBar({
           borderColor={localMicOn && "#ffffff33"}
           isFocused={localMicOn}
           focusIconColor={localMicOn && "white"}
-          tooltip={"Toggle Mic"}
           renderRightComponent={() => {
             return (
               <>
@@ -356,19 +355,6 @@ export function BottomBar({
                     </>
                   )}
                 </Popover>
-                <div
-                  style={{ zIndex: 999 }}
-                  className={`${
-                    tooltipShow ? "" : "hidden"
-                  } overflow-hidden flex flex-col items-center justify-center pb-4`}
-                  ref={tooltipRef}
-                >
-                  <div className={"rounded-md p-1.5 bg-black "}>
-                    <p className="text-base text-white ">
-                      {"Change microphone"}
-                    </p>
-                  </div>
-                </div>
               </>
             );
           }}
@@ -432,7 +418,6 @@ export function BottomBar({
           borderColor={localWebcamOn && "#ffffff33"}
           isFocused={localWebcamOn}
           focusIconColor={localWebcamOn && "white"}
-          tooltip={"Toggle Webcam"}
           renderRightComponent={() => {
             return (
               <>
@@ -520,17 +505,6 @@ export function BottomBar({
                     </>
                   )}
                 </Popover>
-                <div
-                  style={{ zIndex: 999 }}
-                  className={`${
-                    tooltipShow ? "" : "hidden"
-                  } overflow-hidden flex flex-col items-center justify-center pb-4`}
-                  ref={tooltipRef}
-                >
-                  <div className={"rounded-md p-1.5 bg-black "}>
-                    <p className="text-base text-white ">{"Change webcam"}</p>
-                  </div>
-                </div>
               </>
             );
           }}
@@ -599,12 +573,11 @@ export function BottomBar({
     return (
       <OutlinedButton
         Icon={EndIcon}
-        bgColor="bg-red-150"
+        bgColor="bg-red-650 hover:bg-red-700"
         onClick={() => {
           leave();
           setIsMeetingLeft(true);
         }}
-        tooltip="Leave Meeting"
       />
     );
   };
@@ -672,7 +645,7 @@ export function BottomBar({
     const [isCopied, setIsCopied] = useState(false);
     return (
       <div className="flex items-center justify-center lg:ml-0 ml-4 mt-4 xl:mt-0">
-        <div className="flex border-2 border-gray-850 p-2 rounded-md items-center justify-center">
+        <div className="flex border-2 border-gray-850 p-2 rounded-full items-center justify-center">
           <h1 className="text-white text-base ">{meetingId}</h1>
           <button
             className="ml-2"
@@ -725,10 +698,10 @@ export function BottomBar({
   );
 
   const otherFeatures = [
-    { icon: BottomBarButtonTypes.RAISE_HAND },
-    { icon: BottomBarButtonTypes.PIP },
-    { icon: BottomBarButtonTypes.SCREEN_SHARE },
-    { icon: BottomBarButtonTypes.CHAT },
+    // { icon: BottomBarButtonTypes.RAISE_HAND },
+    // { icon: BottomBarButtonTypes.PIP },
+    // { icon: BottomBarButtonTypes.SCREEN_SHARE },
+    // { icon: BottomBarButtonTypes.CHAT },
     { icon: BottomBarButtonTypes.PARTICIPANTS },
     { icon: BottomBarButtonTypes.MEETING_ID_COPY },
   ];
@@ -741,7 +714,7 @@ export function BottomBar({
       <LeaveBTN />
       <MicBTN />
       <WebCamBTN />
-      <RecordingBTN />
+      {/* <RecordingBTN /> */}
       <OutlinedButton Icon={DotsHorizontalIcon} onClick={handleClickFAB} />
       <Transition appear show={Boolean(open)} as={Fragment}>
         <Dialog
@@ -825,16 +798,16 @@ export function BottomBar({
       <MeetingIdCopyBTN />
 
       <div className="flex flex-1 items-center justify-center" ref={tollTipEl}>
-        <RecordingBTN />
-        <RaiseHandBTN isMobile={isMobile} isTab={isTab} />
+        {/* <RecordingBTN /> */}
+        {/* <RaiseHandBTN isMobile={isMobile} isTab={isTab} /> */}
         <MicBTN />
         <WebCamBTN />
-        <ScreenShareBTN isMobile={isMobile} isTab={isTab} />
-        <PipBTN isMobile={isMobile} isTab={isTab} />
+        {/* <ScreenShareBTN isMobile={isMobile} isTab={isTab} /> */}
+        {/* <PipBTN isMobile={isMobile} isTab={isTab} /> */}
         <LeaveBTN />
       </div>
       <div className="flex items-center justify-center">
-        <ChatBTN isMobile={isMobile} isTab={isTab} />
+        {/* <ChatBTN isMobile={isMobile} isTab={isTab} /> */}
         <ParticipantsBTN isMobile={isMobile} isTab={isTab} />
       </div>
     </div>

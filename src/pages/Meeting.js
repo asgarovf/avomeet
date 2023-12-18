@@ -48,7 +48,7 @@ function Meeting() {
               meetingId,
               micEnabled: micOn,
               webcamEnabled: webcamOn,
-              name: participantName ? participantName : "TestUser",
+              name: participantName ? participantName : "Guest",
 
               multiStream: true,
             }}
