@@ -519,13 +519,6 @@ export function BottomBar({
     return isMobile || isTab ? (
       <MobileIconButton
         id="screen-share-btn"
-        tooltipTitle={
-          presenterId
-            ? localScreenShareOn
-              ? "Stop Presenting"
-              : null
-            : "Present Screen"
-        }
         buttonText={
           presenterId
             ? localScreenShareOn
@@ -700,7 +693,7 @@ export function BottomBar({
   const otherFeatures = [
     // { icon: BottomBarButtonTypes.RAISE_HAND },
     // { icon: BottomBarButtonTypes.PIP },
-    // { icon: BottomBarButtonTypes.SCREEN_SHARE },
+    { icon: BottomBarButtonTypes.SCREEN_SHARE },
     // { icon: BottomBarButtonTypes.CHAT },
     { icon: BottomBarButtonTypes.PARTICIPANTS },
     { icon: BottomBarButtonTypes.MEETING_ID_COPY },
@@ -802,7 +795,7 @@ export function BottomBar({
         {/* <RaiseHandBTN isMobile={isMobile} isTab={isTab} /> */}
         <MicBTN />
         <WebCamBTN />
-        {/* <ScreenShareBTN isMobile={isMobile} isTab={isTab} /> */}
+        <ScreenShareBTN isMobile={isMobile} isTab={isTab} />
         {/* <PipBTN isMobile={isMobile} isTab={isTab} /> */}
         <LeaveBTN />
       </div>

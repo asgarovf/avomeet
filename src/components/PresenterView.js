@@ -6,6 +6,7 @@ import ScreenShareIcon from "../icons/ScreenShareIcon";
 import SpeakerIcon from "../icons/SpeakerIcon";
 import { nameTructed } from "../utils/helper";
 import { CornerDisplayName } from "./ParticipantView";
+import { Button } from "../ui/Button";
 
 export function PresenterView({ height }) {
   const mMeeting = useMeeting();
@@ -118,19 +119,19 @@ export function PresenterView({ height }) {
               />
               <div className="mt-4">
                 <p className="text-white text-xl font-semibold">
-                  You are presenting to everyone
+                  You are sharing your screen with everyone
                 </p>
               </div>
               <div className="mt-8">
-                <button
-                  className="bg-purple-550 text-white px-4 py-2 rounded text-sm text-center font-medium"
+                <Button
+                  className="bg-red-500 hover:bg-red-600 px-4 py-2 rounded text-sm text-center font-medium"
                   onClick={(e) => {
                     e.stopPropagation();
                     mMeeting.toggleScreenShare();
                   }}
                 >
                   STOP PRESENTING
-                </button>
+                </Button>
               </div>
             </div>
             <CornerDisplayName
